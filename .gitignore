@@ -1,0 +1,23 @@
+# Local data, model caches and intermediate files of the full pipeline (not redistributed)
+data/
+cache_hf/
+cache_torch/
+outputs/cache/
+outputs/thumbnails/
+outputs/run_log.txt
+annotations/pages/
+annotations/second_rater/pages/
+*.zip
+
+# Image contact sheets show images of third-party datasets
+outputs/supplementary/FigS1_*
+outputs/supplementary/FigS2_*
+outputs/supplementary/FigS3_*
+outputs/supplementary/FigS5_*
+outputs/supplementary/FigS6_*
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc

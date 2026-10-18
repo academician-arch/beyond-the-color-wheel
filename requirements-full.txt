@@ -1,0 +1,21 @@
+# Beyond the Color Wheel - packages for the full pipeline (downloads the data, runs CLIP and MiDaS)
+#
+# Windows with an NVIDIA GPU (tested: Windows 10, Python 3.14.8, RTX 3080):
+#   python -m venv venv
+#   venv\Scripts\activate
+#   python -m pip install --upgrade pip
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu130
+#   pip install -r requirements-full.txt
+#   python beyond_color_wheel.py
+#
+# Notes
+# - On Windows, 'pip install torch' from PyPI installs a CPU-only build; the --index-url above installs the CUDA 13.0
+#   build, which needs a recent NVIDIA driver. With an older driver, use https://download.pytorch.org/whl/cu126 instead.
+# - On Linux or macOS, 'pip install torch torchvision' is sufficient.
+# - If a package fails to install on Python 3.14, create the virtual environment with Python 3.12 or 3.13;
+#   the script runs on Python 3.10-3.14.
+-r requirements.txt
+transformers>=4.57
+huggingface_hub>=0.34
+datasets>=4.0
+timm>=1.0,<1.1
