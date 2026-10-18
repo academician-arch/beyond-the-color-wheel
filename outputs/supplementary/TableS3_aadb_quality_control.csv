@@ -1,0 +1,4 @@
+subset,n,share_icc_tagged,share_icc_converted,share_3_valid_depth_layers,share_missing_H_depth,share_missing_H_shuffled
+Interior (verified),234,0.5213675213675214,0.5213675213675214,1.0,0.0,0.0
+Interior (CLIP strict),578,0.4359861591695502,0.4359861591695502,1.0,0.0,0.0017301038062283738
+General,1500,0.41533333333333333,0.4146666666666667,1.0,0.0,0.0

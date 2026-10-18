@@ -1,0 +1,8 @@
+check,value,expected,passed
+"Symmetry: max |CH(a,b) - CH(b,a)|",3.3306690738754696e-16,0,True
+H_C for identical colors,0.39193948824195995,0.391939,True
+H_dL for dL = 0,-0.004604137011372522,-0.004604,True
+Hue effect H_S: blue (250 deg) > red (30 deg),0.347739752969859,> 0,True
+"E_Y at h = 90 deg, L* = 80",0.17658213176229234,0.176582,True
+Lightness-sum effect: light pair > dark pair,0.9218835814034964,> 0,True
+"Range of CH over 500 random pairs within theoretical bounds [-2.28, 2.62]",-1.2048276215293547,max = 1.111,True

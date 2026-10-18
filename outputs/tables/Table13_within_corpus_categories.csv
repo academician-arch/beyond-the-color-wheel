@@ -1,0 +1,5 @@
+corpus,variable,H,df,p,epsilon2,n,k,categories
+SUN RGB-D,colorfulness,22.77107525995848,10,0.011623857285382563,0.09857608337644364,232,11,classroom (n=35); bedroom (n=32); furniture_store (n=30); rest_space (n=26); office (n=26); living_room (n=18); bathroom (n=17); corridor (n=16); library (n=12); kitchen (n=10); dining_area (n=10)
+SUN RGB-D,H_depth,33.5247898804904,10,0.00022223231833022353,0.14512896052160348,232,11,classroom (n=35); bedroom (n=32); furniture_store (n=30); rest_space (n=26); office (n=26); living_room (n=18); bathroom (n=17); corridor (n=16); library (n=12); kitchen (n=10); dining_area (n=10)
+Interior-Style,colorfulness,26.457849364748427,4,2.558132819261321e-05,0.09060907316694666,293,5,Modern (n=170); Nordic (n=58); Japanese (n=38); Luxury (n=14); Industrial (n=13)
+Interior-Style,H_depth,10.923138510280182,4,0.027441548428863805,0.03740800859684994,293,5,Modern (n=170); Nordic (n=58); Japanese (n=38); Luxury (n=14); Industrial (n=13)

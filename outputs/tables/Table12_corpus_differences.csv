@@ -1,0 +1,4 @@
+variable,comparison,n_1,n_2,median_1,median_2,median_diff,ci_low,ci_high,U,p,rank_biserial_r,interpretation
+H_depth,Interior-Style vs SUN RGB-D,300,300,0.5123420236030221,0.20384164636083302,0.30850037724218904,0.23028593508692982,0.37800243918044174,62957.0,2.7263221187708074e-17,0.39904444444444453,Descriptive dataset-level difference; confounded with acquisition and content
+colorfulness,Interior-Style vs SUN RGB-D,300,300,16.101169090706065,29.840606128870476,-13.73943703816441,-15.574908738551933,-11.533911849765737,15056.0,3.600981676836366e-45,-0.6654222222222222,Descriptive dataset-level difference; confounded with acquisition and content
+depth_dispersion,Interior-Style vs SUN RGB-D,300,300,0.06603394448757166,0.07438880577683445,-0.008354861289262785,-0.012674613017588881,-0.00491832699626686,33692.0,1.0041561753211414e-07,-0.2512888888888889,Descriptive dataset-level difference; confounded with acquisition and content

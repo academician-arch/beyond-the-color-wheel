@@ -1,0 +1,8 @@
+study,source,subset,n,depth,human_ratings
+Study 1,"AADB (Kong et al., 2016), Hugging Face mirror Iceclear/AADB",Interior (verified): CLIP candidates confirmed by manual annotation,234,MiDaS,"Color Harmony (5 raters, mean)"
+Study 1,AADB,"Interior (CLIP strict): interior-space p >= 0.60, before verification",578,MiDaS,"Color Harmony (5 raters, mean)"
+Study 1 (screening only),AADB,"Indoor (broad): CLIP indoor p >= 0.60; people-centered, not analyzed",1788,MiDaS,"Color Harmony (5 raters, mean)"
+Study 1,AADB,General random sample,1500,MiDaS,"Color Harmony (5 raters, mean)"
+Study 2,"SUN RGB-D V1 (Song et al., 2015)",Random scenes,300,Measured (depth_bfx) and MiDaS,none
+Study 3,SUN RGB-D V1,Same scenes as Study 2,300,MiDaS,none
+Study 3,Interior-Style (hammer888/interior_style_dataset),"Shuffled stream, bottom 8% cropped",300,MiDaS,none

@@ -1,0 +1,9 @@
+level,measure,n,estimate,q1_or_ci_low,q3_or_ci_high,statistic,p,note
+Pixel,"Spearman rho, measured vs MiDaS disparity (per image)",300,0.8385562355510712,0.6968703195418365,0.9129591243072146,,,median [IQR]
+Layer,"ARI, MiDaS layers vs measured layers",300,0.421029706852244,0.30617594079583443,0.5792780463434632,,,median [IQR]
+Layer,"ARI, horizontal bands vs measured layers",300,0.15347362614041576,0.06764533637816678,0.25614969657197917,,,median [IQR]
+Layer,"ARI(MiDaS) vs ARI(bands), Wilcoxon signed-rank",300,0.9750609080841639,,,563.0,1.6054608055280055e-48,estimate = matched-pairs rank-biserial r
+Metric,"Spearman rho, H_depth measured vs MiDaS (same pixels)",300,0.8092658807320081,0.7603788612056419,0.8517722856260699,,8.077990010024615e-71,95% bootstrap CI
+Metric,"Lin's CCC, H_depth measured vs MiDaS (same pixels)",300,0.8113581380903173,0.7604956556243858,0.8543442332867287,,,95% bootstrap CI
+Metric,"Lin's CCC, H_depth measured vs MiDaS (all pixels, as used in Studies 1 and 3)",300,0.8080716950683448,0.7600955339465663,0.8505195150920731,,,95% bootstrap CI
+Metric,Bland-Altman mean difference (MiDaS minus measured),300,0.00025519236233466266,-0.43255341688120313,0.4330638016058725,,,interval = 95% limits of agreement

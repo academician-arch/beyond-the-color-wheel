@@ -1,0 +1,9 @@
+measure,n,estimate,ci_low,ci_high
+Strict CLIP candidates,578,,,
+Candidates labeled by the first annotator,578,,,
+Precision of CLIP filter at p_space >= 0.60 (share labeled interior),578,0.40484429065743943,0.36558299985249676,0.44536206373414833
+Precision of CLIP filter at p_space >= 0.80 (share labeled interior),420,0.5047619047619047,0.45711985182106624,0.552317639289713
+Precision of CLIP filter at p_space >= 0.90 (share labeled interior),311,0.6077170418006431,0.5524539984687051,0.6603515203818389
+Precision of CLIP filter at p_space >= 0.95 (share labeled interior),243,0.6748971193415638,0.6136775826287609,0.7306729993443591
+Inter-rater agreement: percent agreement,100,0.94,,
+Inter-rater agreement: Cohen's kappa (95% bootstrap CI),100,0.8598130841121495,0.7428424153166422,0.9547920433996383

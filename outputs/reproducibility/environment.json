@@ -1,0 +1,18 @@
+{
+  "python": "3.14.8",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "numpy": "2.5.2",
+  "pandas": "3.0.6",
+  "scipy": "1.18.1",
+  "sklearn": "1.9.1",
+  "skimage": "0.26.0",
+  "cv2": "5.0.0",
+  "PIL": "12.3.0",
+  "matplotlib": "3.11.2",
+  "torch": "2.14.1+cu130",
+  "transformers": "5.18.0",
+  "datasets": "5.0.1",
+  "huggingface_hub": "1.33.0",
+  "timm": "1.0.30",
+  "cuda_device": "NVIDIA GeForce RTX 3080"
+}

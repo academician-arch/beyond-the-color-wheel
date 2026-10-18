@@ -1,0 +1,18 @@
+{
+  "python": "3.13.16",
+  "platform": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39",
+  "numpy": "2.5.3",
+  "pandas": "3.0.5",
+  "scipy": "1.18.1",
+  "sklearn": "1.9.1",
+  "skimage": "0.26.0",
+  "cv2": "5.0.0",
+  "PIL": "12.3.0",
+  "matplotlib": "3.11.2",
+  "torch": "not installed",
+  "transformers": "not installed",
+  "datasets": "not installed",
+  "huggingface_hub": "not installed",
+  "timm": "not installed",
+  "cuda_device": "n/a"
+}

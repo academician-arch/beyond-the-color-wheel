@@ -1,0 +1,10 @@
+subset,predictor,label,controls,n,partial_rho,ci_low,ci_high,df,p
+Interior (verified),H_depth,Depth layers (primary),"colorfulness, color_entropy_bits, mean_L, mean_C, edge_density",234,-0.10034837235932952,-0.23124127055075544,0.033999519739265696,227,0.1300104345639504
+Interior (verified),H_global,Global palette (depth-free),"colorfulness, color_entropy_bits, mean_L, mean_C, edge_density",234,-0.16279185641061913,-0.28486845705427755,-0.032181405191766974,227,0.013644748428438788
+Interior (verified),H_bands,Horizontal bands (depth-free),"colorfulness, color_entropy_bits, mean_L, mean_C, edge_density",234,-0.05872426321140909,-0.19555354007378933,0.08065187441763237,227,0.37639397771964583
+Interior (CLIP strict),H_depth,Depth layers (primary),"colorfulness, color_entropy_bits, mean_L, mean_C, edge_density",578,-0.048785759176854446,-0.12935104679254583,0.03730733048517495,571,0.24363492896781885
+Interior (CLIP strict),H_global,Global palette (depth-free),"colorfulness, color_entropy_bits, mean_L, mean_C, edge_density",578,-0.03991279759905314,-0.11955804401239277,0.04272562716004399,571,0.3402339676533313
+Interior (CLIP strict),H_bands,Horizontal bands (depth-free),"colorfulness, color_entropy_bits, mean_L, mean_C, edge_density",578,-0.034608976820212814,-0.12065906666735045,0.053148316922626386,571,0.40830042707250447
+General,H_depth,Depth layers (primary),"colorfulness, color_entropy_bits, mean_L, mean_C, edge_density",1500,-0.013645423104724897,-0.06242526588009542,0.039082563643089006,1493,0.5980639756623556
+General,H_global,Global palette (depth-free),"colorfulness, color_entropy_bits, mean_L, mean_C, edge_density",1500,0.013140078461370584,-0.035026675897355246,0.05852148601693858,1493,0.6116910308786276
+General,H_bands,Horizontal bands (depth-free),"colorfulness, color_entropy_bits, mean_L, mean_C, edge_density",1500,-0.0001943181561143627,-0.05016011821979211,0.05237891108366908,1493,0.9940102796099063
