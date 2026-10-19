@@ -188,6 +188,7 @@ CONFIG = OrderedDict(
     ALPHA=0.05,
     MIN_CATEGORY_N=10,
     PIXEL_AGREEMENT_SAMPLE=20000,
+    SESOI_RHO=0.10,                # smallest positive correlation of interest for the one-sided test of H1
 )
 
 OUT = BASE_DIR / "outputs"
@@ -2131,6 +2132,99 @@ if not FROM_FEATURES:
     contact_sheet(_thumbs("style", style_feat["image_id"].head(48), style_feat["style_label"].head(48)),
                   "Interior-Style images (first 48 of the shuffled stream, bottom 8% cropped)", "FigS3_style_contact_sheet")
 # ========================= END SECTION: corpus analysis =========================
+
+# =========================== SECTION: additional analyses ===========================
+# ---------------------------------------------------------------
+# Additional analyses (revision): smallest-effect test of H1, determinants of H_depth, comparison of H_depth with
+# the image statistics, sample overlaps, color-content baselines for Study 2, multiplicity of the category tests
+# ---------------------------------------------------------------
+def one_sided_below(r, n, bound):
+    # One-sided test of H0: rho >= bound (Fisher z with the variance of Fieller, Hartley & Pearson, 1957).
+    se = np.sqrt(1.06 / (n - 3))
+    z = (np.arctanh(r) - np.arctanh(bound)) / se
+    return float(z), float(stats.norm.cdf(z))
+
+
+def paired_ccc_difference(ref, a, b, n_boot=None, seed=None):
+    # CCC(ref, a) - CCC(ref, b) with a paired percentile bootstrap CI.
+    ref, a, b = _complete(ref, a, b)
+    n_boot = n_boot or CONFIG["N_BOOT"]
+    rng = np.random.default_rng(CONFIG["RANDOM_SEED"] if seed is None else seed)
+    d = [lin_ccc(ref[i], a[i]) - lin_ccc(ref[i], b[i]) for i in (rng.integers(0, len(ref), len(ref)) for _ in range(n_boot))]
+    lo, hi = np.percentile(d, [2.5, 97.5])
+    return len(ref), lin_ccc(ref, a) - lin_ccc(ref, b), float(lo), float(hi)
+
+
+rows = []
+
+
+def add_row(study, analysis, sample, measure, n, estimate, ci_low=np.nan, ci_high=np.nan, statistic=np.nan, p=np.nan,
+            note=""):
+    rows.append(OrderedDict(study=study, analysis=analysis, sample=sample, measure=measure, n=n, estimate=estimate,
+                            ci_low=ci_low, ci_high=ci_high, statistic=statistic, p=p, p_holm=np.nan, note=note))
+
+
+# Study 1a: one-sided test that the correlation of H_depth with the ratings is smaller than the SESOI
+for name, d in SUBSETS.items():
+    res = spearman_ci(d["H_depth"], d["ColorHarmony"])
+    z, p = one_sided_below(res["rho"], res["n"], CONFIG["SESOI_RHO"])
+    add_row("Study 1", "Smallest-effect test of H1", name, f"H0: rho(H_depth, Color Harmony) >= {CONFIG['SESOI_RHO']:.2f}",
+            res["n"], res["rho"], res["ci_low"], res["ci_high"], z, p, "one-sided p; Fisher z with variance 1.06/(n - 3)")
+
+# Study 1b: what H_depth and the ratings respond to (lightness, chroma, colorfulness)
+for name, d in SUBSETS.items():
+    for target, tlabel in [("H_depth", "H_depth"), ("ColorHarmony", "Color Harmony rating")]:
+        for v in ["mean_L", "mean_C", "colorfulness"]:
+            res = spearman_ci(d[target], d[v])
+            add_row("Study 1", "Determinants of H_depth and of the ratings", name, f"rho({tlabel}, {v})", res["n"],
+                    res["rho"], res["ci_low"], res["ci_high"], np.nan, res["p"], "Spearman rho, 95% bootstrap CI")
+
+# Study 1c: are the image statistics more strongly associated with the ratings than H_depth? (Meng et al., 1992)
+for name, d in SUBSETS.items():
+    block = []
+    for v in COVARIATES:
+        res = delta_rho(d["ColorHarmony"], d[v], d["H_depth"])
+        block.append(OrderedDict(study="Study 1", analysis="Image statistics vs H_depth (dependent correlations)", sample=name,
+                                 measure=f"rho(rating, {v}) - rho(rating, H_depth)", n=res["n"], estimate=res["delta_rho"],
+                                 ci_low=res["ci_low"], ci_high=res["ci_high"], statistic=res["z_mrr"], p=res["p_mrr"],
+                                 p_holm=np.nan, note="Meng, Rosenthal & Rubin (1992) z; paired bootstrap 95% CI; Holm within sample"))
+    for b, a in zip(block, holm([b["p"] for b in block])):
+        b["p_holm"] = a
+    rows += block
+
+# Study 1d: overlap between the samples and between the two annotation subsamples
+_ver, _str, _gen = (set(SUBSETS[k]["key"]) if k in SUBSETS else set() for k in ["Interior (verified)", "Interior (CLIP strict)", "General"])
+add_row("Study 1", "Sample overlap", "Interior (verified) and General", "images in both samples", len(_ver & _gen), np.nan)
+add_row("Study 1", "Sample overlap", "Interior (CLIP strict) and General", "images in both samples", len(_str & _gen), np.nan)
+if ANNOTATION_FILE.exists() and SECOND_RATER_FILE.exists():
+    _a1 = pd.read_excel(ANNOTATION_FILE, sheet_name="labels")
+    _pilot = set(_a1.loc[_a1.get("source", pd.Series(dtype=str)) == "audit_100", "key"].astype(str))
+    _sr = set(pd.read_excel(SECOND_RATER_FILE, sheet_name="labels")["key"].astype(str))
+    add_row("Study 1", "Sample overlap", "Pilot audit and reliability sample", "images in both annotation subsamples",
+            len(_pilot & _sr), np.nan, note=f"pilot n = {len(_pilot)}, reliability sample n = {len(_sr)}")
+
+# Study 2: how much of the concordance of H_depth arises from the colors of the scene alone?
+_ref = sun_feat["H_depth_measured"]
+for col, lab in [("H_depth_midas_same_pixels", "MiDaS layers (same pixels)"), ("H_bands", "horizontal bands (depth-free)"),
+                 ("H_shuffled", "shuffled depth (depth of another scene)")]:
+    lo, hi = bootstrap_stat(lin_ccc, _ref, sun_feat[col])
+    n_ = len(_complete(_ref, sun_feat[col])[0])
+    add_row("Study 2", "Color-content baselines", "SUN RGB-D", f"Lin's CCC, H_depth measured vs {lab}", n_,
+            lin_ccc(_ref, sun_feat[col]), lo, hi, note="95% bootstrap CI")
+for col, lab in [("H_bands", "horizontal bands"), ("H_shuffled", "shuffled depth")]:
+    n_, dd, lo, hi = paired_ccc_difference(_ref, sun_feat["H_depth_midas_same_pixels"], sun_feat[col])
+    add_row("Study 2", "Color-content baselines", "SUN RGB-D", f"Delta CCC, MiDaS layers minus {lab}", n_, dd, lo, hi,
+            note="paired 95% bootstrap CI; scenes with all scores defined")
+
+# Study 3: Holm adjustment across the four Kruskal-Wallis tests of Table 13
+_ok = T13[np.isfinite(T13["p"].astype(float))]
+for (_, r), a in zip(_ok.iterrows(), holm(_ok["p"].astype(float).to_numpy())):
+    add_row("Study 3", "Category effects, multiplicity", r["corpus"], f"Kruskal-Wallis, {r['variable']}", int(r["n"]),
+            float(r["epsilon2"]), statistic=float(r["H"]), p=float(r["p"]), note="estimate = epsilon squared; Holm across the four tests")
+    rows[-1]["p_holm"] = float(a)
+
+TS7 = save_table(pd.DataFrame(rows), "TableS7_additional_analyses", folder=SUP_DIR)
+# ========================= END SECTION: additional analyses =========================
 
 # =========================== SECTION: fig1 ===========================
 # ---------------------------------------------------------------

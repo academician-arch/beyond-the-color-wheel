@@ -1,8 +1,8 @@
-# Beyond the Color Wheel: Validating a Depth-Aware Computational Measure of Spatial Color Harmony in Interior Scenes
+# Beyond the Color Wheel: Testing a Depth-Aware Computational Measure of Spatial Color Harmony in Interior Scenes
 
 Code, manual annotations, per-image data and outputs for the article
 
-> Bal, H., Koyuncu, F., & Polat, A. I. (2026). *Beyond the color wheel: Validating a depth-aware computational measure of spatial color harmony in interior scenes.* Manuscript submitted for publication.
+> Bal, H., Koyuncu, F., & Polat, A. I. (2026). *Beyond the color wheel: Testing a depth-aware computational measure of spatial color harmony in interior scenes.* Manuscript submitted for publication.
 
 The repository contains everything needed to reproduce the reported numbers, tables and figures: the analysis script, the
 manual interior annotations, the identifiers and per-image features of every analyzed image, and the outputs of the
@@ -117,6 +117,7 @@ probabilities and harmony scores were not visible. The criteria (Table S2 of the
 | Table S11 | `outputs/tables/Table12_corpus_differences` |
 | Table S12 | `outputs/tables/Table11_interaction_model` |
 | Table S13 | `outputs/tables/Table13_within_corpus_categories` |
+| Table S14 | `outputs/supplementary/TableS7_additional_analyses` |
 | Figure S1 | `outputs/supplementary/FigS4_aadb_rating_distribution` |
 | Figures S2–S5 | image contact sheets, produced by the full pipeline (`FigS1`, `FigS5`, `FigS2`, `FigS3`); not distributed here, see below |
 | Figure S6 | `outputs/figures/Fig2_Hdepth_by_human_rating` |
@@ -156,6 +157,15 @@ and are therefore not included; the full pipeline recreates them.
 
 The code is released under the MIT License (see `LICENSE`). The manual annotations and the derived per-image data are
 released under the Creative Commons Attribution 4.0 International License (CC BY 4.0).
+
+## Version history
+
+- **1.1.0** – Additional analyses added in the revision of the article (Table S14,
+  `outputs/supplementary/TableS7_additional_analyses`): one-sided test of H1 against a smallest effect size of interest
+  (rho = .10), correlations of H_depth and of the ratings with the image statistics, comparison of the image statistics with
+  H_depth (Meng et al., 1992), sample overlaps, depth-free baselines for the concordance analysis of Study 2, and Holm
+  adjustment of the category tests of Study 3. All previously reported values are unchanged.
+- **1.0.0** – Initial release.
 
 ## Citation
 

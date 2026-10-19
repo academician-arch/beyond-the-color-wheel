@@ -2,7 +2,8 @@ cff-version: 1.2.0
 message: "If you use this code or data, please cite the article and this repository."
 title: "Beyond the Color Wheel: code, annotations and data"
 type: software
-version: 1.0.0
+version: 1.1.0
+doi: 10.5281/zenodo.23453319
 license: MIT
 authors:
   - family-names: Bal
@@ -25,4 +26,4 @@ keywords:
   - criterion validity
 abstract: >-
   Analysis pipeline, manual interior annotations, per-image features and outputs for the article
-  "Beyond the Color Wheel: Validating a Depth-Aware Computational Measure of Spatial Color Harmony in Interior Scenes".
+  "Beyond the Color Wheel: Testing a Depth-Aware Computational Measure of Spatial Color Harmony in Interior Scenes".
